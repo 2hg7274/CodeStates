@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>CO2 Emission Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand">HAN</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse show" id="navbarCollapse">
+                  <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link data" href="/data">Data</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link predict" href="/predict">CO2 Predict</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link dashboard" href="/dashboard">DashBorad</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+        </nav>
+    </header>
+
+    <main>
+        <hr>
+        <hr class="featurette-divider">
+        <hr class="featurette-divider">
+  
+        <div class="container" style="background-color:white">
+            <h2 class="container-heading">
+                <span class="heading_first">CO2 Emissions</span>
+            </h2>
+        </div>
+
+
+        <div class="prediction-container">
+            <!--Predection Form-->
+            <div class="prediction-container-form">
+                <form action="/predict/ans" method="POST">
+                    <!--Manufacture select-->
+                    <select class="input-manufacture" name="manuf">
+                        <option value="none">제조사 선택</option>
+                        <option value="아우디">아우디</option>
+                        <option value="현대">현대</option>
+                        <option value="푸조">푸조</option>
+                        <option value="기아">기아</option>
+                        <option value="토요타">토요타</option>
+                        <option value="폭스바겐">폭스바겐</option>
+                        <option value="쌍용">쌍용</option>
+                        <option value="혼다">혼다</option>
+                        <option value="벤츠">벤츠</option>
+                        <option value="한국지엠">한국지엠</option>
+                        <option value="MINI">MINI</option>
+                        <option value="BMW">BMW</option>
+                        <option value="르노삼성">르노삼성</option>
+                        <option value="크라이슬러">크라이슬러</option>
+                        <option value="시트로앵">시트로앵</option>
+                        <option value="미쓰비시">미쓰비시</option>
+                        <option value="재규어">재규어</option>
+                        <option value="랜드로버">랜드로버</option>
+                        <option value="닛산">닛산</option>
+                        <option value="GM">GM</option>
+                        <option value="포르쉐">포르쉐</option>
+                        <option value="볼보">볼보</option>
+                        <option value="스바루">스바루</option>
+                        <option value="어울림">어울림</option>
+                        <option value="마제라티">마제라티</option>
+                        <option value="페라리">페라리</option>
+                        <option value="롤스로이스">롤스로이스</option>
+                        <option value="람보르기니">람보르기니</option>
+                        <option value="벤틀리">벤틀리</option>
+                        <option value="포드">포드</option>
+                        <option value="AD 모터스">AD 모터스</option>
+                    </select>
+                    <br>
+
+                    <!--fuel select-->
+                    <select calss="input-fuel" name="fuel">
+                        <option value="none">유종 선택</option>
+                        <option value="경유">경유</option>
+                        <option value="휘발유">휘발유</option>
+                        <option value="LPG">LPG</option>
+                        <option value="전기+휘발유">전기+휘발유</option>
+                        <option value="전기">전기</option>
+                    </select>
+                    <br>
+
+                    <!--cc select-->
+                    <input class="input-cc" type="number" name="cc" min="0" max="7000"> 배기량 입력 (최소:0cc / 최대:7,000cc)
+                    <br>
+
+                    <!--fuel effifiency-->
+                    <input class="input-fuel-efficiency" type="number" name="fuelefficiency" min="3.5" max="40.0"> 복합연비 입력 (최소:3.5(km/l or km/kWh) / 최대: 40(km/l or km/kWh))
+                    <br>
+
+                    <!--grade select-->
+                    <select class="input-grade" name="grade"> *PHEV: 플러그인 하이브리드
+                        <option value="none">등급 선택</option>
+                        <option value="1등급">1등급</option>
+                        <option value="2등급">2등급</option>
+                        <option value="3등급">3등급</option>
+                        <option value="4등급">4등급</option>
+                        <option value="5등급">5등급</option>
+                        <option value="PHEV">PHEV</option>
+                        <option value="경형">경형</option>
+                        <option value="고속">고속</option>
+                        <option value="저속">저속</option>
+                    </select>
+                    <br>
+
+                    <!--DI select-->
+                    <select class="input-di" name="di">
+                        <option value="none">국산/수입 선택</option>
+                        <option value="국산">국산</option>
+                        <option value="수입">수입</option>
+                    </select>
+                    <br>
+
+                    <!--자동차 형식 select-->
+                    <select class="input-type" name="cartype">
+                        <option value="none">자동차 형식 선택</option>
+                        <option value="내연기관">내연기관</option>
+                        <option value="하이브리드">하이브리드</option>
+                        <option value="PHEV">PHEV</option>
+                        <option value="전기">전기</option>
+                    </select>
+                    <br>
+
+                    <!--자동차 종류 select-->
+                    <select class="input-category" name="carcategory">
+                        <option value="none">자동차 종류 선택</option>
+                        <option value="승용차">승용차</option>
+                        <option value="화물차">화물차</option>
+                        <option value="승합차">승합차</option>
+                    </select>
+                    <br>
+
+                    <!--자동차 유형 select-->
+                    <select class="input-obj" name="obj">
+                        <option value="none">자동차 유형 선택</option>
+                        <option value="다목적형">다목적형</option>
+                        <option value="일반형">일반형</option>
+                        <option value="기타형">기타형</option>
+                        <option value="화물">화물</option>
+                        <option value="벤형">벤형</option>
+                        <option value="덤프형">덤프형</option>
+                        <option value="승합">승합</option>
+                        <option value="승용겸화물형">승용겸화물형</option>
+                    </select>
+                    <br>
+
+                    <input type="submit" class="myButton" value="Predict">
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- FOOTER -->
+        <hr>
+        <br>
+        <br>
+        <hr class="featurette-divider">
+  
+        <footer class="container" style="background-color:white">
+            <p class="float-end"><a href="/">Back to main</a></p>
+            <p>2hg7274 · <a href="/github">Github</a></p>
+          </footer>
+    </main>
+    
+</body>
+</html>
