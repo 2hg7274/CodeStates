@@ -55,3 +55,4 @@ def fine_tunning(model):
                     metrics = ['accuracy'])
 
     return model
+
